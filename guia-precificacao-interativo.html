@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Guia de Precificação — Polaroid em Casamentos</title>
+<title>Guia de Precificação | Polaroid em Casamentos</title>
 <style>
 
   @font-face {
@@ -318,6 +318,101 @@ h1 em{ font-style:italic; font-weight:500; color: var(--gold); }
   .branch-row{ flex-direction:column; }
   .node-value{ display:none; }
 }
+
+/* ---------- CALCULADORA ---------- */
+.calc{
+  width:100%; max-width:720px; margin: 0 auto 64px auto;
+  background: var(--paper); border:1px solid var(--gold); border-radius:6px;
+  box-shadow: 0 6px 28px rgba(169,126,75,0.12);
+}
+.calc-head{ padding: 26px 28px 18px 28px; border-bottom:1px solid var(--rule); }
+.calc-head .node-label{ color: var(--gold); }
+.calc-head .node-title{ font-size:24px; }
+.calc-head p{ margin:8px 0 0 0; font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
+.calc-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.calc-btn{
+  background:none; border:1px solid var(--rule); border-radius:100px;
+  padding: 7px 16px; font-size:12.5px; color: var(--ink-soft); cursor:pointer;
+  font-family:'Inter'; transition: all .2s ease;
+}
+.calc-btn:hover{ border-color: var(--gold); color: var(--gold); }
+.calc-btn.gold{ border-color: var(--gold); color: var(--gold); }
+.calc-sec{ padding: 6px 28px 4px 28px; }
+.calc-sec-title{
+  font-size:11.5px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase;
+  color: var(--olive); margin: 18px 0 4px 0; padding-bottom:8px; border-bottom:1px solid var(--rule);
+}
+.citem{ padding: 14px 0; border-bottom: 1px dotted var(--rule); }
+.citem:last-child{ border-bottom:none; }
+.citem-top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+.citem-name{ font-weight:600; font-size:14.5px; }
+.citem-name input{
+  font: inherit; font-weight:600; border:none; border-bottom:1px dashed var(--rule);
+  background:transparent; color:var(--ink); padding:2px 0; width: 200px; max-width:100%;
+}
+.citem-name input:focus{ outline:none; border-bottom-color: var(--gold); }
+.citem-help{ font-size:12px; color:var(--ink-faint); margin-top:2px; }
+.citem-val{
+  font-family:'Cormorant'; font-weight:700; font-size:21px; color: var(--gold);
+  white-space:nowrap; font-variant-numeric: tabular-nums;
+}
+.citem-val.zero{ color: var(--ink-faint); }
+.citem-fields{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin-top:10px; font-size:13.5px; color:var(--ink-soft); }
+.fld{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.fld input{
+  width: 92px; padding: 8px 10px; border:1px solid var(--line); border-radius:4px;
+  font-family:'Inter'; font-size:14.5px; color:var(--ink); background:#FFFDFA;
+  font-variant-numeric: tabular-nums;
+}
+.fld input.sm{ width:66px; }
+.fld input:focus{ outline:none; border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
+.fld input::placeholder{ color:#cdc5b9; }
+.citem-del{
+  background:none; border:none; color:var(--ink-faint); cursor:pointer; font-size:12px;
+  font-family:'Inter'; padding:4px 0; margin-left:auto; text-decoration:underline;
+}
+.citem-del:hover{ color:#a14a3a; }
+.calc-add{ padding: 10px 28px 4px 28px; }
+.calc-total{
+  margin: 18px 28px 0 28px; padding: 16px 0; border-top: 1.5px solid var(--gold);
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+}
+.calc-total-label{ font-family:'Cormorant'; font-weight:600; font-size:19px; }
+.calc-total-val{ font-family:'Cormorant'; font-weight:700; font-size:28px; color:var(--gold); font-variant-numeric: tabular-nums; }
+.calc-result{
+  background: var(--olive); color:#F2F0EA; border-radius: 0 0 6px 6px;
+  padding: 24px 28px 28px 28px; margin-top: 10px;
+}
+.calc-result .fld input{ background:#FFFFFF; width:140px; font-size:16px; font-weight:600; }
+.calc-contract{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.calc-contract-label{ font-family:'Cormorant'; font-style:italic; font-size:18px; }
+.calc-lines{ margin-top:14px; }
+.calc-line{
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+  padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.12); font-size:14px;
+}
+.calc-line .val{ font-family:'Cormorant'; font-weight:600; font-size:19px; font-variant-numeric: tabular-nums; white-space:nowrap; }
+.calc-line.big{ border-bottom:none; padding-top:14px; }
+.calc-line.big span:first-child{ font-family:'Cormorant'; font-style:italic; font-size:19px; }
+.calc-line.big .val{ font-size:34px; color:#E8C79A; font-weight:700; }
+.calc-line.big.neg .val{ color:#F2A08F; }
+.calc-alert{
+  display:none; margin-top:12px; padding:12px 16px; border-radius:4px;
+  background: rgba(242,160,143,0.16); border-left:3px solid #F2A08F; font-size:13px; line-height:1.55;
+}
+.calc-alert.show{ display:block; }
+.calc-empty{ font-size:13.5px; color:#C9D4C3; font-style:italic; font-family:'Cormorant'; margin-top:12px; }
+.guide-sep{ text-align:center; margin: 0 auto 30px auto; max-width:720px; }
+.guide-sep .node-label{ margin-bottom:4px; }
+.guide-sep p{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 0 0; }
+
+@media (max-width: 640px){
+  .calc-head, .calc-sec, .calc-add{ padding-left:18px; padding-right:18px; }
+  .calc-total{ margin-left:18px; margin-right:18px; }
+  .calc-result{ padding-left:18px; padding-right:18px; }
+  .fld input{ width:84px; }
+  .citem-name input{ width: 160px; }
+}
 </style>
 </head>
 <body>
@@ -338,6 +433,47 @@ h1 em{ font-style:italic; font-weight:500; color: var(--gold); }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 9a3 3 0 1 1 5.12 2.12c-.86.86-1.62 1.38-1.62 2.88" stroke-linecap="round"/><circle cx="12" cy="17.5" r="0.6" fill="currentColor"/></svg>
       Clique nos cartões abaixo para explorar
     </div>
+  </div>
+
+
+  <!-- CALCULADORA DE CUSTOS DO EVENTO -->
+  <div class="calc" id="calc">
+    <div class="calc-head">
+      <div class="node-label">Calculadora do seu evento</div>
+      <div class="node-title">Quanto custou o seu evento e quanto sobrou</div>
+      <p>Coloque o que você pagou em cada material e quanto usou no evento. A conta é feita na hora. Os preços mudam? É só trocar o número: tudo fica salvo neste aparelho.</p>
+      <div class="calc-actions">
+        <button class="calc-btn gold" id="calc-exemplo" type="button">Preencher com o exemplo do guia</button>
+        <button class="calc-btn" id="calc-limpar" type="button">Limpar tudo</button>
+      </div>
+    </div>
+    <div id="calc-secoes"></div>
+    <div class="calc-add"><button class="calc-btn" id="calc-add" type="button">+ Adicionar outro material</button></div>
+    <div class="calc-total">
+      <span class="calc-total-label">Custo do evento</span>
+      <span class="calc-total-val" id="calc-custo">R$ 0,00</span>
+    </div>
+    <div class="calc-result">
+      <div class="calc-contract">
+        <span class="calc-contract-label">Valor do contrato fechado</span>
+        <label class="fld">R$ <input id="calc-contrato" inputmode="decimal" placeholder="2.500,00"></label>
+      </div>
+      <div class="calc-empty" id="calc-vazio">Digite o valor do contrato para ver o seu lucro.</div>
+      <div class="calc-lines" id="calc-linhas" style="display:none">
+        <div class="calc-line"><span>(-) Custo do evento</span><span class="val" id="r-custo"></span></div>
+        <div class="calc-line" id="r-taxas-linha"><span id="r-taxas-label">(-) Taxas</span><span class="val" id="r-taxas"></span></div>
+        <div class="calc-line big" id="r-lucro-linha"><span>Seu lucro</span><span class="val" id="r-lucro"></span></div>
+        <div class="calc-line"><span>Quanto do contrato virou lucro</span><span class="val" id="r-margem"></span></div>
+        <div class="calc-line" id="r-foto-linha"><span>Custo por foto entregue</span><span class="val" id="r-foto"></span></div>
+      </div>
+      <div class="calc-alert" id="calc-alerta"></div>
+    </div>
+  </div>
+
+  <div class="guide-sep">
+    <div class="node-label">Entenda a conta</div>
+    <div class="node-title" style="font-size:21px;">Exemplo explicado, passo a passo</div>
+    <p>Um evento de 40 fotos com os números do guia. Clique em cada etapa.</p>
   </div>
 
   <div class="flow" id="flow">
@@ -393,7 +529,7 @@ h1 em{ font-style:italic; font-weight:500; color: var(--gold); }
       <div class="node-body">
         <div class="node-body-inner">
           <div class="detail-row"><span>Diária de freelancer, quando aplicável</span><span class="val">R$ 150,00 / dia</span></div>
-          <div class="detail-note">Esse custo é <strong>deduzido do lucro final</strong> — ele não entra na formação do preço cobrado do cliente, apenas reduz o que sobra pra você no fim.</div>
+          <div class="detail-note">Esse custo é <strong>deduzido do lucro final</strong>. Ele não entra na formação do preço cobrado do cliente, apenas reduz o que sobra pra você no fim.</div>
         </div>
       </div>
     </div>
@@ -448,16 +584,16 @@ h1 em{ font-style:italic; font-weight:500; color: var(--gold); }
       <div class="result-title">Resultado · lucro bruto estimado</div>
       <div class="result-placeholder" id="result-placeholder">Escolha um método acima para ver o resultado final</div>
       <div class="result-content" id="result-content">
-        <div class="result-row"><span id="result-revenue-label">Faturamento</span><span class="val" id="result-revenue">—</span></div>
+        <div class="result-row"><span id="result-revenue-label">Faturamento</span><span class="val" id="result-revenue">-</span></div>
         <div class="result-row" style="opacity:.75; font-size:13.5px;"><span>(–) Custo total base</span><span class="val">R$ 350,00</span></div>
         <div class="result-split">
           <div class="result-final">
             <span class="result-final-label">Lucro bruto<br>sem freelancer</span>
-            <span class="val" id="result-profit-clean">—</span>
+            <span class="val" id="result-profit-clean">-</span>
           </div>
           <div class="result-final">
             <span class="result-final-label">Lucro bruto<br>com freelancer (R$ 150)</span>
-            <span class="val" id="result-profit-freelancer">—</span>
+            <span class="val" id="result-profit-freelancer">-</span>
           </div>
         </div>
       </div>
@@ -466,7 +602,7 @@ h1 em{ font-style:italic; font-weight:500; color: var(--gold); }
   </div>
 
   <div class="footer">
-    <span class="footer-brand">Guia de Freelancer — Casamentos</span>
+    <span class="footer-brand">Guia de Freelancer | Casamentos</span>
     <button class="reset-btn" id="reset-btn">Reiniciar</button>
   </div>
 
@@ -563,6 +699,172 @@ h1 em{ font-style:italic; font-weight:500; color: var(--gold); }
     selectedMethod = null;
     showResult(null);
   });
+})();
+</script>
+
+<script>
+(function(){
+  var CHAVE = 'inframe-calc-custos-v1';
+  // tipos: un = paguei R$ em N, usei M | pilha = paguei R$ em N, câmeras x pilhas | fixo = valor | free = pessoas x diária | pct = % do contrato
+  var ITENS = [
+    { sec:'Materiais do evento', id:'filme', nome:'Filme', tipo:'un', und:'fotos', ajuda:'Ex.: R$ 56,18 numa caixa com 10 fotos. Em "usei", conte também as fotos que queimaram ou repetiram.', ex:{p:'56,18', q:'10', u:'40'} },
+    { sec:'Materiais do evento', id:'album', nome:'Álbum', tipo:'un', und:'álbuns', ajuda:'Quanto pagou no álbum (ou no lote de álbuns).', ex:{p:'60,00', q:'1', u:'1'} },
+    { sec:'Materiais do evento', id:'cantoneiras', nome:'Cantoneiras', tipo:'un', und:'un.', ajuda:'Ex.: pacote com 80. Cada foto costuma usar 4 cantoneiras.', ex:{p:'6,00', q:'80', u:'160'} },
+    { sec:'Materiais do evento', id:'canetas', nome:'Canetas', tipo:'un', und:'canetas', ajuda:'Canetas que ficam na mesa para os convidados escreverem.', ex:{p:'9,00', q:'3', u:'1'} },
+    { sec:'Materiais do evento', id:'pilhas', nome:'Pilhas', tipo:'pilha', ajuda:'Pilhas trocadas em cada câmera para este evento.', ex:{p:'10,22', q:'4', c:'2', pc:'2'} },
+    { sec:'Materiais do evento', id:'ima', nome:'Ímã atrás da foto', tipo:'un', und:'ímãs', ajuda:'Opcional. Para as fotos de lembrança dos convidados.' },
+    { sec:'Materiais do evento', id:'saquinho', nome:'Saquinho ou embalagem', tipo:'un', und:'un.', ajuda:'Opcional. Embalagem da foto que o convidado leva.' },
+    { sec:'Outros custos do evento', id:'placa', nome:'Placa com QR / decoração', tipo:'fixo', ajuda:'Impressão da placa, flores ou o que gastou na mesa só para este evento.' },
+    { sec:'Outros custos do evento', id:'desloc', nome:'Deslocamento', tipo:'fixo', ajuda:'Combustível, pedágio, estacionamento ou Uber até o evento.', ex:{v:'40,00'} },
+    { sec:'Outros custos do evento', id:'alim', nome:'Alimentação da equipe', tipo:'fixo', ajuda:'Opcional. Se você ou a equipe precisaram comer fora.' },
+    { sec:'Outros custos do evento', id:'free', nome:'Freelancer', tipo:'free', ajuda:'Opcional. Quem te ajudou no evento.', ex:{n:'1', d:'150,00'} },
+    { sec:'Taxas sobre o contrato', id:'maq', nome:'Taxa da maquininha / parcelamento', tipo:'pct', ajuda:'Opcional. Se a noiva pagou no cartão, quanto a maquininha descontou.' },
+    { sec:'Taxas sobre o contrato', id:'imp', nome:'Imposto', tipo:'pct', ajuda:'Opcional. Se você emite nota com imposto sobre o valor.' }
+  ];
+  var EX_CONTRATO = '1.260,00';
+
+  var estado = carregar();
+
+  function carregar(){
+    try { var s = JSON.parse(localStorage.getItem(CHAVE)); if (s && s.v) return s; } catch(e){}
+    return { v:{}, extras:[], contrato:'' };
+  }
+  function salvar(){ try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch(e){} }
+
+  function num(s){
+    if (s == null) return 0;
+    s = String(s).trim().replace(/[R$\s%]/g,'');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g,'').replace(',', '.');
+    else if (/^\d+\.\d{1,2}$/.test(s)) { /* 56.18 = decimal */ }
+    else s = s.replace(/\./g,'');
+    var n = parseFloat(s);
+    return isFinite(n) && n > 0 ? n : 0;
+  }
+  function brl(n){ return (n < 0 ? '- ' : '') + 'R$ ' + Math.abs(n).toLocaleString('pt-BR',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function val(id, k){ var o = estado.v[id]; return o ? (o[k] || '') : ''; }
+
+  function custoItem(it, id){
+    var g = function(k){ return num(val(id,k)); };
+    if (it.tipo === 'un'){ var q = g('q'); return q ? g('p') / q * g('u') : 0; }
+    if (it.tipo === 'pilha'){ var q2 = g('q'); return q2 ? g('p') / q2 * g('c') * g('pc') : 0; }
+    if (it.tipo === 'fixo') return g('v');
+    if (it.tipo === 'free') return g('n') * g('d');
+    return 0;
+  }
+
+  function campo(id, k, txt, ph, sm, antes){
+    return '<label class="fld">' + (antes||'') + '<input data-id="'+id+'" data-k="'+k+'" inputmode="decimal" class="'+(sm?'sm':'')+'" placeholder="'+(ph||'')+'" value="'+esc(val(id,k))+'">' + (txt||'') + '</label>';
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+  function camposDe(it, id){
+    var ex = it.ex || {};
+    if (it.tipo === 'un') return campo(id,'p','', ex.p||'0,00', false, 'paguei R$') + campo(id,'q', ' '+it.und, ex.q||'', true, 'em') + campo(id,'u', ' neste evento', ex.u||'', true, 'usei');
+    if (it.tipo === 'pilha') return campo(id,'p','', ex.p||'0,00', false, 'paguei R$') + campo(id,'q',' pilhas', ex.q||'', true, 'em') + campo(id,'c',' câmeras ×', ex.c||'', true, 'troquei em') + campo(id,'pc',' pilhas cada', ex.pc||'', true);
+    if (it.tipo === 'fixo') return campo(id,'v','', ex.v||'0,00', false, 'R$');
+    if (it.tipo === 'free') return campo(id,'n',' pessoas ×', ex.n||'0', true) + campo(id,'d','', ex.d||'0,00', false, 'diária R$');
+    if (it.tipo === 'pct') return campo(id,'pct',' % do contrato', '0', true);
+    return '';
+  }
+
+  function render(){
+    var html = '', secAtual = '';
+    var mat = ITENS.filter(function(t){ return t.sec === 'Materiais do evento'; });
+    var resto = ITENS.filter(function(t){ return t.sec !== 'Materiais do evento'; });
+    var extras = estado.extras.map(function(x){ return { sec:'Materiais do evento', id:x, extra:true, tipo:'un', und:'un.', ajuda:'Material extra deste evento.' }; });
+    var todos = mat.concat(extras, resto);
+    todos.forEach(function(it){
+      if (it.sec !== secAtual){
+        if (secAtual) html += '</div>';
+        html += '<div class="calc-sec"><div class="calc-sec-title">'+it.sec+'</div>';
+        secAtual = it.sec;
+      }
+      var nome = it.extra
+        ? '<input data-id="'+it.id+'" data-k="nome" placeholder="Nome do material" value="'+esc(val(it.id,'nome'))+'">'
+        : it.nome;
+      html += '<div class="citem" data-item="'+it.id+'">' +
+        '<div class="citem-top"><div><div class="citem-name">'+nome+'</div><div class="citem-help">'+it.ajuda+'</div></div>' +
+        '<span class="citem-val" id="v-'+it.id+'"></span></div>' +
+        '<div class="citem-fields">' + camposDe(it, it.id) + (it.extra ? '<button class="citem-del" data-del="'+it.id+'" type="button">remover</button>' : '') + '</div></div>';
+    });
+    if (secAtual) html += '</div>';
+    document.getElementById('calc-secoes').innerHTML = html;
+    document.getElementById('calc-contrato').value = estado.contrato || '';
+    window.__calcItens = todos;
+    calcular();
+  }
+
+  function calcular(){
+    var todos = window.__calcItens || ITENS;
+    var custo = 0, pct = 0;
+    todos.forEach(function(it){
+      var el = document.getElementById('v-'+it.id);
+      if (it.tipo === 'pct'){
+        var p = num(val(it.id,'pct')); pct += p;
+        if (el){ el.textContent = p ? p.toLocaleString('pt-BR') + '%' : '-'; el.classList.toggle('zero', !p); }
+        return;
+      }
+      var c = custoItem(it, it.id); custo += c;
+      if (el){ el.textContent = c ? brl(c) : '-'; el.classList.toggle('zero', !c); }
+    });
+    document.getElementById('calc-custo').textContent = brl(custo);
+
+    var contrato = num(estado.contrato);
+    var linhas = document.getElementById('calc-linhas');
+    var vazio = document.getElementById('calc-vazio');
+    var alerta = document.getElementById('calc-alerta');
+    if (!contrato){ linhas.style.display = 'none'; vazio.style.display = 'block'; alerta.classList.remove('show'); return; }
+    linhas.style.display = 'block'; vazio.style.display = 'none';
+    var taxas = contrato * pct / 100;
+    var lucro = contrato - custo - taxas;
+    document.getElementById('r-custo').textContent = brl(custo);
+    document.getElementById('r-taxas-linha').style.display = pct ? 'flex' : 'none';
+    document.getElementById('r-taxas-label').textContent = '(-) Taxas (' + pct.toLocaleString('pt-BR') + '%)';
+    document.getElementById('r-taxas').textContent = brl(taxas);
+    document.getElementById('r-lucro').textContent = brl(lucro);
+    document.getElementById('r-lucro-linha').classList.toggle('neg', lucro < 0);
+    var margem = lucro / contrato * 100;
+    document.getElementById('r-margem').textContent = Math.round(margem) + '%';
+    var fotos = num(val('filme','u'));
+    document.getElementById('r-foto-linha').style.display = fotos ? 'flex' : 'none';
+    document.getElementById('r-foto').textContent = fotos ? brl((custo + taxas) / fotos) : '';
+    if (lucro < 0){
+      alerta.innerHTML = '<strong>Esse contrato não cobre os custos.</strong> Você paga ' + brl(-lucro) + ' para trabalhar. Reveja o preço do pacote.';
+      alerta.classList.add('show');
+    } else if (margem < 50){
+      alerta.innerHTML = '<strong>Lucro apertado.</strong> Menos da metade do contrato ficou com você. Em casamentos, o guia trabalha com margem bem maior: confira o Método B abaixo.';
+      alerta.classList.add('show');
+    } else alerta.classList.remove('show');
+  }
+
+  var cx = document.getElementById('calc');
+  cx.addEventListener('input', function(e){
+    var t = e.target;
+    if (t.id === 'calc-contrato'){ estado.contrato = t.value; }
+    else if (t.dataset.id){ (estado.v[t.dataset.id] = estado.v[t.dataset.id] || {})[t.dataset.k] = t.value; }
+    else return;
+    salvar(); calcular();
+  });
+  cx.addEventListener('click', function(e){
+    var d = e.target.getAttribute && e.target.getAttribute('data-del');
+    if (d){ estado.extras = estado.extras.filter(function(x){ return x !== d; }); delete estado.v[d]; salvar(); render(); }
+  });
+  document.getElementById('calc-add').addEventListener('click', function(){
+    var id = 'extra' + Date.now();
+    estado.extras.push(id); salvar(); render();
+    var el = document.querySelector('[data-id="'+id+'"][data-k="nome"]'); if (el) el.focus();
+  });
+  document.getElementById('calc-exemplo').addEventListener('click', function(){
+    estado = { v:{}, extras:[], contrato: EX_CONTRATO };
+    ITENS.forEach(function(it){ if (it.ex){ var o = {}; for (var k in it.ex) o[k] = it.ex[k]; estado.v[it.id] = o; } });
+    salvar(); render();
+  });
+  document.getElementById('calc-limpar').addEventListener('click', function(){
+    estado = { v:{}, extras:[], contrato:'' }; salvar(); render();
+  });
+
+  render();
 })();
 </script>
 </body>
